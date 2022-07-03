@@ -443,7 +443,8 @@ runOsprober( DeviceModel* dm )
 bool
 isEfiSystem()
 {
-    return QDir( "/sys/firmware/efi/efivars" ).exists();
+    // return QDir( "/sys/firmware/efi/efivars" ).exists();
+    return true;
 }
 
 bool
