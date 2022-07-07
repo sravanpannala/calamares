@@ -50,7 +50,7 @@ TarballRunner::run()
     // Get the stats (number of inodes) from the FS
     {
         m_total = 0;
-        Calamares::Utils::Runner r( { tarExecutable, QStringLiteral( "--use-compress-program=unzstd" ), QStringLiteral( "-tf" ), m_source } );
+        Calamares::Utils::Runner r( { tarExecutable,  QStringLiteral( "-tf" ), m_source } );
         r.setLocation( Calamares::Utils::RunLocation::RunInHost ).enableOutputProcessing();
         QObject::connect( &r, &decltype( r )::output, [ & ]( QString line ) { m_total++; } );
         /* ignored */ r.run();
@@ -65,7 +65,7 @@ TarballRunner::run()
         m_processed = 0;
         m_since = 0;
         Calamares::Utils::Runner r(
-            { tarExecutable, QStringLiteral( "--use-compress-program=unzstd" ), QStringLiteral( "-xpvf" ), m_source, QStringLiteral( "-C" ), destinationPath } );
+            { tarExecutable,  QStringLiteral( "-xpvf" ), m_source, QStringLiteral( "-C" ), destinationPath } );
         r.setLocation( Calamares::Utils::RunLocation::RunInHost ).enableOutputProcessing();
         connect( &r, &decltype( r )::output, this, &TarballRunner::tarballProgress );
         return r.run().explainProcess( toolName, std::chrono::seconds( 0 ) );
